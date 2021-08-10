@@ -1,0 +1,37 @@
+version: '3'
+services:
+ target:
+   build:
+     context: .
+   network_mode: bridge
+   ports:
+     - 9995-9997:9997
+   volumes:
+     - ./:/code
+   command: node app.js target/
+
+ splitter:
+   build:
+     context: .
+   network_mode: bridge
+   ports:
+     - 9998:9997
+   depends_on:
+      - "target"
+   volumes:
+     - ./:/code
+   command: node app.js splitter/
+
+ agent:
+   build:
+     context: .
+   network_mode: bridge
+   ports:
+     - 9999:9997
+   depends_on:
+      - "target"
+      - "splitter"
+   volumes:
+     - ./:/code
+   command: node app.js agent/
+

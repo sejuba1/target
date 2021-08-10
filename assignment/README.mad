@@ -1,0 +1,19 @@
+## install docker
+`sudo apt  install docker.io`
+
+## install docker-compose
+
+`sudo apt  install docker-compose`
+
+`sudo chmod 666 /var/run/docker.sock`
+
+# Run the app
+docker-compose up --build 
+
+target_1    | App listening on port 9997
+splitter_1  | App listening on port 9998
+
+
+Run `docker-compose scale target=2` observe the second instance come up
+
+target_2    | App listening on port 9997
